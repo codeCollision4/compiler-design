@@ -18,8 +18,6 @@ int isRCurly(string str);
 int isLParen(string str);
 int isRParen(string str);
 int isBar(string str);
-int isWhiteSpace(string str);
-int isError(string str);
 
 
 int main () {
@@ -40,62 +38,44 @@ int main () {
 
             //Loop thru line by space
             while(getline(line, s, ' ')){
-                int flag = 0;
                 if(isReserved(s)){
                     cout << s << " is reserved." << endl;
                     continue;
                 }
                 if(isTypeRef(s)){
                     cout << s << " is a type reference." << endl;
-                    continue;
                 }
                 if(isIdentifier(s)){
                     cout << s << " is an identifier." << endl;
-                    continue;
                 }
                 if(isNumber(s)){
                     cout << s << " is a number." << endl;
-                    continue;
                 }
                 if(isAssignmentLex(s)){
                     cout << s << " is an assignment lexical item." << endl;
-                    continue;
                 }
                 if(isRangeSep(s)){
                     cout << s << " is a range separator." << endl;
-                    continue;
                 }
                 if(isComma(s)){
                     cout << s << " is a comma." << endl;
-                    continue;
                 }
                 if(isLCurly(s)){
                     cout << s << " is a left curly brace." << endl;
-                    continue;
                 }
                 if(isRCurly(s)){
                     cout << s << " is a right curly brace." << endl;
-                    continue;
                 }
                 if(isLParen(s)){
                     cout << s << " is a left parenthesis." << endl;
-                    continue;
                 }
                 if(isRParen(s)){
                     cout << s << " is a right parenthesis." << endl;
-                    continue;
                 }
                 if(isBar(s)){
                     cout << s << " is a vertical bar." << endl;
-                    continue;
                 }
-                if(isWhiteSpace(s)){
-                    cout << s << " is a whitespace." << endl;
-                    continue;
-                }
-                if(isError(s)){
-                    cout << "ERROR" << endl;
-                }
+                
             }
 
         }
@@ -134,7 +114,7 @@ int isReserved(string str){
 
 int isTypeRef(string str){
     //Regex for this
-    regex r("^(?!.*--)[A-Z][a-zA-Z0-9(\\-)]*[^-]$");
+    regex r("^[A-Z][a-zA-Z0-9-]*");
     //Bool search for 
     bool const flag = regex_search(str, r);
     //Returning true if word given is Typereg
@@ -143,7 +123,7 @@ int isTypeRef(string str){
 
 int isIdentifier(string str){
     //Regex for this
-    regex r("^(?!.*--)[a-z][a-zA-Z0-9(\\-)]*[^-]$");
+    regex r("^[a-z][a-zA-Z0-9-]*");
     //Bool search for 
     bool const flag = regex_search(str, r);
     //Returning true if word given is Typereg
@@ -224,20 +204,4 @@ int isBar(string str){
     return flag;
 }
 
-int isWhiteSpace(string str){
-    //Regex for this
-    regex r("\\s");
-    //Bool search for 
-    bool const flag = regex_search(str, r);
-    //Returning true if word given is Typereg
-    return flag;
-}
-int isError(string str){
-    //Regex for this
-    regex r("[\\%]*");
-    //Bool search for 
-    bool const flag = regex_search(str, r);
-    //Returning true if word given is Typereg
-    return flag;
-}
 
